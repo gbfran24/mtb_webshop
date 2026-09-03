@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTB Shop</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .Kategorije-flex {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .row {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .row input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        .row br {
+            margin-bottom: 10px;
+        }
+
+        #submit {
+            display: block;
+            width: 100%;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #submit:hover {
+            background-color: #27ae60;
+        }
+
+        #result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eef2f7;
+            border-left: 5px solid #2ecc71;
+            border-radius: 4px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1> MTB Online Shop</h1>
+
+        <div class="Kategorije-flex">
+            <div class="row" id="bicikli">
+                <h3>MTB Bicikli</h3>
+                <input type="checkbox" value="Hardtail XC Bicikl - 750€"> Hardtail XC Bicikl (750€) <br><br>
+                <input type="checkbox" value="Full Suspension Trail - 1500€"> Full Suspension Trail (1500€) <br><br>
+                <input type="checkbox" value="Downhill bicikl - 2300€"> Downhill  (2300€) <br><br>
+                <input type="checkbox" value="E-MTB Električni - 3000€"> E-MTB  (3000€) <br><br>
+            </div>
+
+            <div class="row" id="oprema">
+                <h3>MTB Oprema</h3>
+                <input type="checkbox" value="Full-face Kaciga - 120€"> Full-face Kaciga (120€) <br><br>
+                <input type="checkbox" value="Zaštitna koljenica - 45€"> Zaštitna koljenica (45€) <br><br>
+                <input type="checkbox" value="Rukavice za bicikl - 25€"> Rukavice za bicikl (25€) <br><br>
+                <input type="checkbox" value="Zračna pumpa - 15€"> Zračna pumpa (15€) <br><br>
+            </div>
+        </div>
+
+        <button id="submit">Prikaži košaricu </button>
+        
+        <div id="result-box">
+            <h3>Vaša narudžba:</h3>
+            <div id="result"><p>Košarica je prazna.</p></div>
+        </div>
+    </div>
+
+    <script>
+
+        let bicikli = document.getElementById("bicikli");
+        let oprema = document.getElementById("oprema");
+
+        let oznaceni_bicikli = bicikli.querySelectorAll('input[type="checkbox"]');
+        let oznaceni_oprema = oprema.querySelectorAll('input[type="checkbox"]');
+
+        function getData() {
+            let result = []; 
+
+            oznaceni_bicikli.forEach(item => {
+                if (item.checked) {
+                    result.push(item.value);
+                }
+            });
+
+            oznaceni_oprema.forEach(item => {
+                if (item.checked) {
+                    result.push(item.value);
+                }
+            });
+
+            let rezultat = "<ul>";
+            for (let i = 0; i < result.length; i++) {
+                rezultat += "<li>" + result[i] + "</li>";
+            }
+            rezultat += "</ul>";
+
+            if(result.length === 0) {
+                rezultat = "<p>Košarica je prazna.</p>";
+            }
+
+            document.getElementById("result").innerHTML = rezultat;
+        }
+
+        document.getElementById("submit").addEventListener("click", getData);
+    </script>
+</body>
+</html>
